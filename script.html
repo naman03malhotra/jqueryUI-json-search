@@ -1,0 +1,42 @@
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"  />
+</head>
+
+<script type="text/javascript">
+var data; // store json data here
+
+$(function() {
+
+  // #mySearch Target Search 
+
+  $("#mySearch").autocomplete({
+            source: data,  // JSON  Data
+            minLength: 2,  // Min length to be searched
+            focus: function (event, ui) {
+              $(event.target).val(ui.item.label);
+
+              return false;
+            },
+            select: function (event, ui) {
+              $(event.target).val(ui.item.label);
+
+              if((ui.item.label)!="")
+                window.location = ui.item.value;
+
+              return false;
+            }
+          });
+  $('#mySearch').focus(function(){            
+    $("#mySearch").css("border", "solid 1px #00bef2");
+    if (this.value == "")
+    {
+     $(this).autocomplete("search");
+   }
+ });
+});
+
+});
+
+</script>
